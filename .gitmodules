@@ -1,0 +1,6 @@
+[submodule "Gen5RNGLib"]
+	path = Gen5RNGLib
+	url = https://github.com/rusted-coil/Gen5RNGLib.git
+[submodule "Gen4RNGLib"]
+	path = Gen4RNGLib
+	url = https://github.com/rusted-coil/Gen4RNGLib.git
