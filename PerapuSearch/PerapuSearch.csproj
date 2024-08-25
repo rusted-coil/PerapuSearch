@@ -8,4 +8,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gen4RNGLib\Gen4RNGLib.csproj" />
+    <ProjectReference Include="..\Gen5RNGLib\Gen5RNGLib.csproj" />
+  </ItemGroup>
+
 </Project>

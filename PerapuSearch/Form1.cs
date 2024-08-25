@@ -1,3 +1,5 @@
+using Gen4RNGLib.Chatot;
+using Gen5RNGLib.Chatot;
 using System.Text;
 
 namespace PerapuSearch
@@ -29,46 +31,69 @@ namespace PerapuSearch
 
             int[] toneMasks = tones.Select(GetInputToneMask).ToArray();
 
+            // TODO
+            bool isGen4 = true;
+            int maxCount = 100;
+
             foreach (var seedString in seeds)
             {
-                if (UInt64.TryParse(seedString, System.Globalization.NumberStyles.HexNumber, null, out UInt64 initialSeed))
+                int[] answerTones = new int[maxCount];
+                // 第4世代版
+                if (isGen4)
                 {
-                    UInt64 seed = GetNextSeed(initialSeed);
-                    int[] answerTones = new int[100];
-                    for (int i = 0; i < 100; ++i)
+                    if (uint.TryParse(seedString, System.Globalization.NumberStyles.HexNumber, null, out uint initialSeed))
                     {
-                        answerTones[i] = GetAnswerTone(seed);
-                        seed = GetNextSeed(seed);
-                    }
+                        var rng = Gen4RngLib.Rng.RngFactory.CreateLcgRng(initialSeed);
 
-                    // answerTonesからtoneMasksにマッチする箇所を検索
-                    for (int a = 0; a <= answerTones.Length - toneMasks.Length; ++a)
+                        for (int i = 0; i < maxCount; ++i)
+                        {
+                            answerTones[i] = GetAnswerTone(rng.Chatter());
+                        }
+                    }
+                    else
                     {
-                        bool isMatched = true;
-                        for (int b = 0; b < toneMasks.Length; ++b)
-                        {
-                            if ((answerTones[a + b] & toneMasks[b]) == 0)
-                            {
-                                isMatched = false;
-                                break;
-                            }
-                        }
-                        if (isMatched)
-                        {
-                            resultStringBuilder.AppendLine($"0x{seedString}: 消費{a}～{a + toneMasks.Length}");
-                        }
+                        resultStringBuilder.AppendLine($"不正なseed: {seedString}");
                     }
                 }
+                // 第5世代版
                 else
                 {
-                    resultStringBuilder.AppendLine($"不正なseed: {seedString}");
+                    if (ulong.TryParse(seedString, System.Globalization.NumberStyles.HexNumber, null, out ulong initialSeed))
+                    {
+                        var rng = Gen5RNGLib.Rng.RngFactory.CreateLcgRng(initialSeed);
+
+                        for (int i = 0; i < maxCount; ++i)
+                        {
+                            answerTones[i] = GetAnswerTone(rng.Chatter());
+                        }
+                    }
+                    else
+                    {
+                        resultStringBuilder.AppendLine($"不正なseed: {seedString}");
+                    }
+                }
+
+                // answerTonesからtoneMasksにマッチする箇所を検索
+                for (int a = 0; a <= answerTones.Length - toneMasks.Length; ++a)
+                {
+                    bool isMatched = true;
+                    for (int b = 0; b < toneMasks.Length; ++b)
+                    {
+                        if ((answerTones[a + b] & toneMasks[b]) == 0)
+                        {
+                            isMatched = false;
+                            break;
+                        }
+                    }
+                    if (isMatched)
+                    {
+                        resultStringBuilder.AppendLine($"0x{seedString}: 消費{a}～{a + toneMasks.Length}");
+                    }
                 }
             }
 
             ResultBox.Text = resultStringBuilder.ToString();
         }
-
-        static UInt64 GetNextSeed(UInt64 seed) => seed * 0x5D588B656C078965ul + 0x269EC3;
 
         static int GetInputToneMask(char letter) => letter switch {
             '1' => 0b00011,
@@ -77,10 +102,9 @@ namespace PerapuSearch
             _   => 0b11111,
         };
 
-        static int GetAnswerTone(UInt64 seed)
+        static int GetAnswerTone(uint toneValue) // 0～8191の値を与え、音程の処理用正解データに変換する
         { 
-            uint rand = (uint)(seed >> 51); // 0～8191
-            uint value = (rand + 1) * 5;
+            uint value = (toneValue + 1) * 5;
             if (value < 8192)
             {
                 return 0b00001;
