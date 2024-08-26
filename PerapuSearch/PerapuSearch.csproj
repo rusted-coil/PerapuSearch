@@ -9,6 +9,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="System.Reactive" Version="6.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Gen4RNGLib\Gen4RNGLib.csproj" />
     <ProjectReference Include="..\Gen5RNGLib\Gen5RNGLib.csproj" />
   </ItemGroup>
