@@ -25,6 +25,15 @@ namespace PerapuSearch
 
             InitializeComponent();
 
+            m_UsageLabel.Text = 
+                "使い方\n" +
+                "・音程: 1(低い音)～\"聴き分ける音の数\"(高い音)の範囲で聴こえたものを入力\n" +
+                "・特殊記号\n" +
+                "　・「.」: 任意の音にマッチ(判定をスキップ)\n" +
+                "　・「+」: 前の音より高い\n" +
+                "　・「-」: 前の音より低い\n" +
+                "　・「=」: 前の音と同じくらい";
+
             GenerationType generation = (GenerationType)config.Generation;
             m_Gen4Check.Checked = generation == GenerationType.Gen4;
             m_Gen5Check.Checked = generation == GenerationType.Gen5;
