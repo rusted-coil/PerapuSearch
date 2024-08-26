@@ -49,8 +49,9 @@
             m_SeedList.Location = new Point(17, 104);
             m_SeedList.Multiline = true;
             m_SeedList.Name = "m_SeedList";
+            m_SeedList.ScrollBars = ScrollBars.Vertical;
             m_SeedList.Size = new Size(215, 135);
-            m_SeedList.TabIndex = 0;
+            m_SeedList.TabIndex = 10;
             m_SeedList.TextChanged += OnTextChanged;
             // 
             // m_ToneBox
@@ -58,8 +59,9 @@
             m_ToneBox.Location = new Point(30, 323);
             m_ToneBox.Multiline = true;
             m_ToneBox.Name = "m_ToneBox";
+            m_ToneBox.ScrollBars = ScrollBars.Vertical;
             m_ToneBox.Size = new Size(929, 81);
-            m_ToneBox.TabIndex = 1;
+            m_ToneBox.TabIndex = 11;
             m_ToneBox.TextChanged += OnTextChanged;
             // 
             // m_ResultBox
@@ -68,8 +70,9 @@
             m_ResultBox.Multiline = true;
             m_ResultBox.Name = "m_ResultBox";
             m_ResultBox.ReadOnly = true;
+            m_ResultBox.ScrollBars = ScrollBars.Vertical;
             m_ResultBox.Size = new Size(1092, 175);
-            m_ResultBox.TabIndex = 2;
+            m_ResultBox.TabIndex = 13;
             // 
             // m_AnswerTones
             // 
@@ -77,8 +80,9 @@
             m_AnswerTones.Multiline = true;
             m_AnswerTones.Name = "m_AnswerTones";
             m_AnswerTones.ReadOnly = true;
+            m_AnswerTones.ScrollBars = ScrollBars.Vertical;
             m_AnswerTones.Size = new Size(848, 231);
-            m_AnswerTones.TabIndex = 3;
+            m_AnswerTones.TabIndex = 12;
             // 
             // m_Gen4Check
             // 
@@ -86,7 +90,7 @@
             m_Gen4Check.Location = new Point(12, 12);
             m_Gen4Check.Name = "m_Gen4Check";
             m_Gen4Check.Size = new Size(67, 19);
-            m_Gen4Check.TabIndex = 4;
+            m_Gen4Check.TabIndex = 0;
             m_Gen4Check.TabStop = true;
             m_Gen4Check.Text = "第4世代";
             m_Gen4Check.UseVisualStyleBackColor = true;
@@ -98,7 +102,7 @@
             m_Gen5Check.Location = new Point(85, 12);
             m_Gen5Check.Name = "m_Gen5Check";
             m_Gen5Check.Size = new Size(67, 19);
-            m_Gen5Check.TabIndex = 5;
+            m_Gen5Check.TabIndex = 1;
             m_Gen5Check.TabStop = true;
             m_Gen5Check.Text = "第5世代";
             m_Gen5Check.UseVisualStyleBackColor = true;
@@ -110,7 +114,7 @@
             label1.Location = new Point(168, 14);
             label1.Name = "label1";
             label1.Size = new Size(58, 15);
-            label1.TabIndex = 6;
+            label1.TabIndex = 2;
             label1.Text = "開始位置:";
             // 
             // m_MinCountBox
@@ -118,7 +122,7 @@
             m_MinCountBox.Location = new Point(232, 11);
             m_MinCountBox.Name = "m_MinCountBox";
             m_MinCountBox.Size = new Size(49, 23);
-            m_MinCountBox.TabIndex = 7;
+            m_MinCountBox.TabIndex = 3;
             m_MinCountBox.TextChanged += m_MinCountBox_TextChanged;
             // 
             // label2
@@ -127,7 +131,7 @@
             label2.Location = new Point(287, 14);
             label2.Name = "label2";
             label2.Size = new Size(19, 15);
-            label2.TabIndex = 8;
+            label2.TabIndex = 4;
             label2.Text = "～";
             // 
             // m_MaxCountBox
@@ -135,7 +139,7 @@
             m_MaxCountBox.Location = new Point(312, 11);
             m_MaxCountBox.Name = "m_MaxCountBox";
             m_MaxCountBox.Size = new Size(49, 23);
-            m_MaxCountBox.TabIndex = 9;
+            m_MaxCountBox.TabIndex = 5;
             m_MaxCountBox.TextChanged += m_MaxCountBox_TextChanged;
             // 
             // label3
@@ -144,7 +148,7 @@
             label3.Location = new Point(382, 14);
             label3.Name = "label3";
             label3.Size = new Size(57, 15);
-            label3.TabIndex = 10;
+            label3.TabIndex = 6;
             label3.Text = "あいまいさ:";
             // 
             // m_FuzzinessBox
@@ -152,7 +156,7 @@
             m_FuzzinessBox.Location = new Point(445, 11);
             m_FuzzinessBox.Name = "m_FuzzinessBox";
             m_FuzzinessBox.Size = new Size(49, 23);
-            m_FuzzinessBox.TabIndex = 11;
+            m_FuzzinessBox.TabIndex = 7;
             m_FuzzinessBox.TextChanged += m_FuzzinessBox_TextChanged;
             // 
             // label4
@@ -161,7 +165,7 @@
             label4.Location = new Point(511, 16);
             label4.Name = "label4";
             label4.Size = new Size(95, 15);
-            label4.TabIndex = 12;
+            label4.TabIndex = 8;
             label4.Text = "聴き分ける音の数:";
             // 
             // m_SampleCountBox
@@ -169,7 +173,7 @@
             m_SampleCountBox.Location = new Point(612, 13);
             m_SampleCountBox.Name = "m_SampleCountBox";
             m_SampleCountBox.Size = new Size(49, 23);
-            m_SampleCountBox.TabIndex = 13;
+            m_SampleCountBox.TabIndex = 9;
             m_SampleCountBox.TextChanged += m_SampleCountBox_TextChanged;
             // 
             // MainForm
