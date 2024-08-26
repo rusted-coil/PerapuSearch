@@ -1,9 +1,9 @@
 ﻿using Gen4RNGLib.Chatot;
 using Gen5RNGLib.Chatot;
-using System.Reactive.Disposables;
-using System.Text;
 using PerapuSearch.Config;
 using PerapuSearch.Infrastructure;
+using System.Reactive.Disposables;
+using System.Text;
 
 namespace PerapuSearch.Main
 {
@@ -114,25 +114,62 @@ namespace PerapuSearch.Main
                     bool isMatched = true;
                     for (int b = 0; b < inputTones.Length; ++b)
                     {
-                        if (inputTones[b] < 0) // 指定されていない文字は全てにマッチ
+                        int k = inputTones[b];
+                        int answer = answerTones[a + b];
+
+                        if (k == c_InputToneWild) // ワイルドカードは全てにマッチ
                         {
                             continue;
                         }
-
-                        // F=Fuzziness
-                        // M=SampleCount
-                        // inputToneがkの時、マッチするのは((100-F)*k/M)%～((100-F)*(k+1)/M + F)%
-                        int k = inputTones[b];
-                        int answer = answerTones[a + b];
-                        
-                        // (100-F)*k/M <= answer * 100 / 8191
-                        // answer * 100 / 8191 <= (100-F)*(k+1)/M + F かどうかを確かめたい
-
-                        if((100 - fuzziness) * k * 8191 > answer * 100 * sampleCount
-                            || answer * 100 * sampleCount > ((100 - fuzziness) * (k + 1) + fuzziness * sampleCount) * 8191)
+                        else if (k == c_InputTonePlus)
                         {
-                            isMatched = false;
-                            break;
+                            if (b == 0)
+                            {
+                                continue;
+                            }
+                            if (answer <= answerTones[a + b - 1])
+                            {
+                                isMatched = false;
+                                break;
+                            }
+                        }
+                        else if (k == c_InputToneMinus)
+                        {
+                            if (b == 0)
+                            {
+                                continue;
+                            }
+                            if (answer >= answerTones[a + b - 1])
+                            {
+                                isMatched = false;
+                                break;
+                            }
+                        }
+                        else if (k == c_InputToneEqual)
+                        {
+                            // 前の音からの差分があいまいさの幅内だったらマッチ
+                            int diff = answer - answerTones[a + b - 1];
+                            if (diff * 200 < -(8191 * fuzziness) || diff * 200 > 8191 * fuzziness)
+                            {
+                                isMatched = false;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            // F=Fuzziness
+                            // M=SampleCount
+                            // inputToneがkの時、マッチするのは((100-F)*k/M)%～((100-F)*(k+1)/M + F)%
+
+                            // (100-F)*k/M <= answer * 100 / 8191
+                            // answer * 100 / 8191 <= (100-F)*(k+1)/M + F かどうかを確かめたい
+
+                            if ((100 - fuzziness) * k * 8191 > answer * 100 * sampleCount
+                                || answer * 100 * sampleCount > ((100 - fuzziness) * (k + 1) + fuzziness * sampleCount) * 8191)
+                            {
+                                isMatched = false;
+                                break;
+                            }
                         }
                     }
                     if (isMatched)
@@ -145,13 +182,29 @@ namespace PerapuSearch.Main
             m_Form.SetResultText(resultStringBuilder.ToString());
         }
 
+        const int c_InputToneWild = -1;
+        const int c_InputTonePlus = -2;
+        const int c_InputToneMinus = -3;
+        const int c_InputToneEqual = -4;
         static int ConvertInputToneLetter(char letter, int sampleCount)
         {
             if (letter >= '1' && letter < '1' + sampleCount)
             {
                 return letter - '1';
             }
-            return -1;
+            else if (letter == '+')
+            {
+                return c_InputTonePlus;
+            }
+            else if (letter == '-')
+            {
+                return c_InputToneMinus;
+            }
+            else if (letter == '=')
+            {
+                return c_InputToneEqual;
+            }
+            return c_InputToneWild;
         }
     }
 }
