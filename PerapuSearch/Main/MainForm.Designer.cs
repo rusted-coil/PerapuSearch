@@ -34,6 +34,10 @@
             m_AnswerTones = new TextBox();
             m_Gen4Check = new RadioButton();
             m_Gen5Check = new RadioButton();
+            label1 = new Label();
+            m_MinCountBox = new TextBox();
+            label2 = new Label();
+            m_MaxCountBox = new TextBox();
             SuspendLayout();
             // 
             // m_SeedList
@@ -82,6 +86,7 @@
             m_Gen4Check.TabStop = true;
             m_Gen4Check.Text = "第4世代";
             m_Gen4Check.UseVisualStyleBackColor = true;
+            m_Gen4Check.CheckedChanged += m_Gen4Check_CheckedChanged;
             // 
             // m_Gen5Check
             // 
@@ -93,12 +98,51 @@
             m_Gen5Check.TabStop = true;
             m_Gen5Check.Text = "第5世代";
             m_Gen5Check.UseVisualStyleBackColor = true;
+            m_Gen5Check.CheckedChanged += m_Gen5Check_CheckedChanged;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(168, 14);
+            label1.Name = "label1";
+            label1.Size = new Size(58, 15);
+            label1.TabIndex = 6;
+            label1.Text = "開始位置:";
+            // 
+            // m_MinCountBox
+            // 
+            m_MinCountBox.Location = new Point(232, 11);
+            m_MinCountBox.Name = "m_MinCountBox";
+            m_MinCountBox.Size = new Size(49, 23);
+            m_MinCountBox.TabIndex = 7;
+            m_MinCountBox.TextChanged += m_MinCountBox_TextChanged;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(287, 14);
+            label2.Name = "label2";
+            label2.Size = new Size(19, 15);
+            label2.TabIndex = 8;
+            label2.Text = "～";
+            // 
+            // m_MaxCountBox
+            // 
+            m_MaxCountBox.Location = new Point(312, 11);
+            m_MaxCountBox.Name = "m_MaxCountBox";
+            m_MaxCountBox.Size = new Size(49, 23);
+            m_MaxCountBox.TabIndex = 9;
+            m_MaxCountBox.TextChanged += m_MaxCountBox_TextChanged;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1121, 628);
+            Controls.Add(m_MaxCountBox);
+            Controls.Add(label2);
+            Controls.Add(m_MinCountBox);
+            Controls.Add(label1);
             Controls.Add(m_Gen5Check);
             Controls.Add(m_Gen4Check);
             Controls.Add(m_AnswerTones);
@@ -119,5 +163,9 @@
         private TextBox m_AnswerTones;
         private RadioButton m_Gen4Check;
         private RadioButton m_Gen5Check;
+        private Label label1;
+        private TextBox m_MinCountBox;
+        private Label label2;
+        private TextBox m_MaxCountBox;
     }
 }
