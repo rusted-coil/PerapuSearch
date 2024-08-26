@@ -20,6 +20,7 @@ namespace PerapuSearch.Main
 
             m_Disposables.Add(m_Form.ConfigChanged.Subscribe(_ => SaveConfig()));
             m_Disposables.Add(m_Form.InputChanged.Subscribe(args => Calculate(args.Seeds, args.Tones)));
+            m_Disposables.Add(m_Form.Gen4SeedInputSupportButton.Clicked.Subscribe(_ => OpenGen4SeedInputSupportForm()));
         }
 
         public void Run()
@@ -37,6 +38,15 @@ namespace PerapuSearch.Main
             if (!Serializer.Serialize("config.json", m_Config, out string errorMessage))
             {
                 MessageBox.Show(errorMessage);
+            }
+        }
+
+        void OpenGen4SeedInputSupportForm()
+        {
+            var stream = Gen4SeedInputSupport.Gen4SeedInputSupportFormFactory.OpenOrFocusForm();
+            if (stream != null)
+            {
+                m_Disposables.Add(stream.Subscribe(m_Form.SetSeedsText));
             }
         }
 

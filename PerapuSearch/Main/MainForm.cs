@@ -1,3 +1,4 @@
+using FormRx.Button;
 using PerapuSearch.Config;
 using System.Reactive;
 using System.Reactive.Subjects;
@@ -17,6 +18,8 @@ namespace PerapuSearch
         Subject<Unit> m_ConfigChanged = new Subject<Unit>();
         public IObservable<Unit> ConfigChanged => m_ConfigChanged;
 
+        public IButton Gen4SeedInputSupportButton { get; }
+
         readonly ConfigData m_Config;
 
         public MainForm(ConfigData config)
@@ -24,6 +27,8 @@ namespace PerapuSearch
             m_Config = config;
 
             InitializeComponent();
+
+            Gen4SeedInputSupportButton = ButtonFactory.CreateButton(m_Gen4SeedInputSupportButton);
 
             m_UsageLabel.Text = 
                 "Žg‚¢•û\n" +
@@ -42,10 +47,8 @@ namespace PerapuSearch
             m_SampleCountBox.Text = config.SampleCount.ToString();
         }
 
-        public void SetResultText(string resultText)
-        {
-            m_ResultBox.Text = resultText;
-        }
+        public void SetResultText(string resultText) => m_ResultBox.Text = resultText;
+        public void SetSeedsText(string text) => m_SeedList.Text = text;
 
         private void OnTextChanged(object sender, EventArgs e)
         {

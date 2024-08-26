@@ -42,6 +42,7 @@
             label4 = new Label();
             m_SampleCountBox = new TextBox();
             groupBox1 = new GroupBox();
+            m_Gen4SeedInputSupportButton = new Button();
             groupBox2 = new GroupBox();
             m_UsageLabel = new Label();
             groupBox3 = new GroupBox();
@@ -58,7 +59,7 @@
             m_SeedList.Multiline = true;
             m_SeedList.Name = "m_SeedList";
             m_SeedList.ScrollBars = ScrollBars.Vertical;
-            m_SeedList.Size = new Size(203, 321);
+            m_SeedList.Size = new Size(203, 225);
             m_SeedList.TabIndex = 10;
             m_SeedList.TextChanged += OnTextChanged;
             // 
@@ -83,7 +84,7 @@
             m_ResultBox.Name = "m_ResultBox";
             m_ResultBox.ReadOnly = true;
             m_ResultBox.ScrollBars = ScrollBars.Vertical;
-            m_ResultBox.Size = new Size(881, 315);
+            m_ResultBox.Size = new Size(881, 224);
             m_ResultBox.TabIndex = 13;
             // 
             // m_Gen4Check
@@ -127,7 +128,7 @@
             // m_MinCountBox
             // 
             m_MinCountBox.Font = new Font("メイリオ", 9F);
-            m_MinCountBox.Location = new Point(232, 13);
+            m_MinCountBox.Location = new Point(235, 13);
             m_MinCountBox.Margin = new Padding(3, 4, 3, 4);
             m_MinCountBox.Name = "m_MinCountBox";
             m_MinCountBox.Size = new Size(49, 25);
@@ -138,7 +139,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("メイリオ", 9F);
-            label2.Location = new Point(287, 17);
+            label2.Location = new Point(290, 17);
             label2.Name = "label2";
             label2.Size = new Size(20, 18);
             label2.TabIndex = 4;
@@ -147,7 +148,7 @@
             // m_MaxCountBox
             // 
             m_MaxCountBox.Font = new Font("メイリオ", 9F);
-            m_MaxCountBox.Location = new Point(312, 13);
+            m_MaxCountBox.Location = new Point(316, 13);
             m_MaxCountBox.Margin = new Padding(3, 4, 3, 4);
             m_MaxCountBox.Name = "m_MaxCountBox";
             m_MaxCountBox.Size = new Size(49, 25);
@@ -167,7 +168,7 @@
             // m_FuzzinessBox
             // 
             m_FuzzinessBox.Font = new Font("メイリオ", 9F);
-            m_FuzzinessBox.Location = new Point(445, 13);
+            m_FuzzinessBox.Location = new Point(461, 14);
             m_FuzzinessBox.Margin = new Padding(3, 4, 3, 4);
             m_FuzzinessBox.Name = "m_FuzzinessBox";
             m_FuzzinessBox.Size = new Size(49, 25);
@@ -178,7 +179,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("メイリオ", 9F);
-            label4.Location = new Point(511, 19);
+            label4.Location = new Point(534, 17);
             label4.Name = "label4";
             label4.Size = new Size(109, 18);
             label4.TabIndex = 8;
@@ -187,7 +188,7 @@
             // m_SampleCountBox
             // 
             m_SampleCountBox.Font = new Font("メイリオ", 9F);
-            m_SampleCountBox.Location = new Point(612, 16);
+            m_SampleCountBox.Location = new Point(649, 13);
             m_SampleCountBox.Margin = new Padding(3, 4, 3, 4);
             m_SampleCountBox.Name = "m_SampleCountBox";
             m_SampleCountBox.Size = new Size(49, 25);
@@ -196,16 +197,26 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(m_Gen4SeedInputSupportButton);
             groupBox1.Controls.Add(m_SeedList);
             groupBox1.Font = new Font("メイリオ", 9F);
             groupBox1.Location = new Point(12, 64);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(235, 371);
+            groupBox1.Size = new Size(235, 294);
             groupBox1.TabIndex = 15;
             groupBox1.TabStop = false;
             groupBox1.Text = "初期seed候補";
+            // 
+            // m_Gen4SeedInputSupportButton
+            // 
+            m_Gen4SeedInputSupportButton.Location = new Point(56, 258);
+            m_Gen4SeedInputSupportButton.Name = "m_Gen4SeedInputSupportButton";
+            m_Gen4SeedInputSupportButton.Size = new Size(123, 25);
+            m_Gen4SeedInputSupportButton.TabIndex = 11;
+            m_Gen4SeedInputSupportButton.Text = "第4世代入力補助";
+            m_Gen4SeedInputSupportButton.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -216,7 +227,7 @@
             groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(660, 371);
+            groupBox2.Size = new Size(660, 294);
             groupBox2.TabIndex = 16;
             groupBox2.TabStop = false;
             groupBox2.Text = "入力";
@@ -235,11 +246,11 @@
             // 
             groupBox3.Controls.Add(m_ResultBox);
             groupBox3.Font = new Font("メイリオ", 9F);
-            groupBox3.Location = new Point(12, 442);
+            groupBox3.Location = new Point(12, 366);
             groupBox3.Margin = new Padding(3, 4, 3, 4);
             groupBox3.Name = "groupBox3";
             groupBox3.Padding = new Padding(3, 4, 3, 4);
-            groupBox3.Size = new Size(920, 361);
+            groupBox3.Size = new Size(920, 267);
             groupBox3.TabIndex = 17;
             groupBox3.TabStop = false;
             groupBox3.Text = "結果";
@@ -248,7 +259,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 18F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(944, 817);
+            ClientSize = new Size(944, 641);
             Controls.Add(groupBox3);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
@@ -295,5 +306,6 @@
         private GroupBox groupBox2;
         private GroupBox groupBox3;
         private Label m_UsageLabel;
+        private Button m_Gen4SeedInputSupportButton;
     }
 }
