@@ -38,6 +38,10 @@
             m_MinCountBox = new TextBox();
             label2 = new Label();
             m_MaxCountBox = new TextBox();
+            label3 = new Label();
+            m_FuzzinessBox = new TextBox();
+            label4 = new Label();
+            m_SampleCountBox = new TextBox();
             SuspendLayout();
             // 
             // m_SeedList
@@ -134,11 +138,49 @@
             m_MaxCountBox.TabIndex = 9;
             m_MaxCountBox.TextChanged += m_MaxCountBox_TextChanged;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(382, 14);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 15);
+            label3.TabIndex = 10;
+            label3.Text = "あいまいさ:";
+            // 
+            // m_FuzzinessBox
+            // 
+            m_FuzzinessBox.Location = new Point(445, 11);
+            m_FuzzinessBox.Name = "m_FuzzinessBox";
+            m_FuzzinessBox.Size = new Size(49, 23);
+            m_FuzzinessBox.TabIndex = 11;
+            m_FuzzinessBox.TextChanged += m_FuzzinessBox_TextChanged;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(511, 16);
+            label4.Name = "label4";
+            label4.Size = new Size(95, 15);
+            label4.TabIndex = 12;
+            label4.Text = "聴き分ける音の数:";
+            // 
+            // m_SampleCountBox
+            // 
+            m_SampleCountBox.Location = new Point(612, 13);
+            m_SampleCountBox.Name = "m_SampleCountBox";
+            m_SampleCountBox.Size = new Size(49, 23);
+            m_SampleCountBox.TabIndex = 13;
+            m_SampleCountBox.TextChanged += m_SampleCountBox_TextChanged;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1121, 628);
+            Controls.Add(m_SampleCountBox);
+            Controls.Add(label4);
+            Controls.Add(m_FuzzinessBox);
+            Controls.Add(label3);
             Controls.Add(m_MaxCountBox);
             Controls.Add(label2);
             Controls.Add(m_MinCountBox);
@@ -167,5 +209,9 @@
         private TextBox m_MinCountBox;
         private Label label2;
         private TextBox m_MaxCountBox;
+        private Label label3;
+        private TextBox m_FuzzinessBox;
+        private Label label4;
+        private TextBox m_SampleCountBox;
     }
 }

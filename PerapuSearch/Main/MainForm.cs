@@ -29,6 +29,8 @@ namespace PerapuSearch
             m_Gen4Check.Checked = generation == GenerationType.Gen4;
             m_Gen5Check.Checked = generation == GenerationType.Gen5;
             SetCounts();
+            m_FuzzinessBox.Text = config.Fuzziness.ToString();
+            m_SampleCountBox.Text = config.SampleCount.ToString();
         }
 
         public void SetResultText(string resultText)
@@ -77,7 +79,7 @@ namespace PerapuSearch
         }
 
         void SetCounts()
-        { 
+        {
             m_isCountChangeEventDisabled = true;
 
             if (m_Config.Generation == (int)GenerationType.Gen4)
@@ -142,6 +144,32 @@ namespace PerapuSearch
             else
             {
                 MessageBox.Show($"–³Œø‚È“ü—Í: {m_MaxCountBox.Text}");
+            }
+        }
+
+        private void m_FuzzinessBox_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(m_FuzzinessBox.Text, out int result))
+            {
+                m_Config.Fuzziness = result;
+                m_ConfigChanged.OnNext(default);
+            }
+            else
+            {
+                MessageBox.Show($"–³Œø‚È“ü—Í: {m_FuzzinessBox.Text}");
+            }
+        }
+
+        private void m_SampleCountBox_TextChanged(object sender, EventArgs e)
+        {
+            if (int.TryParse(m_SampleCountBox.Text, out int result))
+            {
+                m_Config.SampleCount = result;
+                m_ConfigChanged.OnNext(default);
+            }
+            else
+            {
+                MessageBox.Show($"–³Œø‚È“ü—Í: {m_SampleCountBox.Text}");
             }
         }
     }

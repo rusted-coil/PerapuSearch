@@ -44,8 +44,6 @@ namespace PerapuSearch.Main
         {
             StringBuilder resultStringBuilder = new StringBuilder();
 
-            int[] toneMasks = tones.Select(GetInputToneMask).ToArray();
-
             int minCount, maxCount;
             if (m_Config.Generation == (int)MainForm.GenerationType.Gen4)
             {
@@ -57,6 +55,10 @@ namespace PerapuSearch.Main
                 minCount = m_Config.Gen5MinCount;
                 maxCount = m_Config.Gen5MaxCount + tones.Length;
             }
+            int fuzziness = m_Config.Fuzziness;
+            int sampleCount = m_Config.SampleCount;
+
+            int[] inputTones = tones.Select(letter => ConvertInputToneLetter(letter, sampleCount)).ToArray();
 
             foreach (var seedString in seeds)
             {
@@ -70,7 +72,7 @@ namespace PerapuSearch.Main
 
                         for (int i = 0; i < maxCount; ++i)
                         {
-                            answerTones[i] = GetAnswerTone(rng.Chatter());
+                            answerTones[i] = (int)rng.Chatter();
                         }
                     }
                     else
@@ -87,7 +89,7 @@ namespace PerapuSearch.Main
 
                         for (int i = 0; i < maxCount; ++i)
                         {
-                            answerTones[i] = GetAnswerTone(rng.Chatter());
+                            answerTones[i] = (int)rng.Chatter();
                         }
                     }
                     else
@@ -96,13 +98,28 @@ namespace PerapuSearch.Main
                     }
                 }
 
-                // answerTonesからtoneMasksにマッチする箇所を検索
-                for (int a = minCount; a <= answerTones.Length - toneMasks.Length; ++a)
+                // answerTonesからinputTonesにマッチする箇所を検索
+                for (int a = minCount; a <= answerTones.Length - inputTones.Length; ++a)
                 {
                     bool isMatched = true;
-                    for (int b = 0; b < toneMasks.Length; ++b)
+                    for (int b = 0; b < inputTones.Length; ++b)
                     {
-                        if ((answerTones[a + b] & toneMasks[b]) == 0)
+                        if (inputTones[b] < 0) // 指定されていない文字は全てにマッチ
+                        {
+                            continue;
+                        }
+
+                        // F=Fuzziness
+                        // M=SampleCount
+                        // inputToneがkの時、マッチするのは((100-F)*k/M)%～((100-F)*(k+1)/M + F)%
+                        int k = inputTones[b];
+                        int answer = answerTones[a + b];
+                        
+                        // (100-F)*k/M <= answer * 100 / 8191
+                        // answer * 100 / 8191 <= (100-F)*(k+1)/M + F かどうかを確かめたい
+
+                        if((100 - fuzziness) * k * 8191 > answer * 100 * sampleCount
+                            || answer * 100 * sampleCount > ((100 - fuzziness) * (k + 1) + fuzziness * sampleCount) * 8191)
                         {
                             isMatched = false;
                             break;
@@ -110,7 +127,7 @@ namespace PerapuSearch.Main
                     }
                     if (isMatched)
                     {
-                        resultStringBuilder.AppendLine($"0x{seedString}: 消費{a}～{a + toneMasks.Length}");
+                        resultStringBuilder.AppendLine($"0x{seedString}: 消費{a}～{a + inputTones.Length}");
                     }
                 }
             }
@@ -118,37 +135,13 @@ namespace PerapuSearch.Main
             m_Form.SetResultText(resultStringBuilder.ToString());
         }
 
-        static int GetInputToneMask(char letter) => letter switch
+        static int ConvertInputToneLetter(char letter, int sampleCount)
         {
-            '1' => 0b00011,
-            '2' => 0b01110,
-            '3' => 0b11000,
-            _ => 0b11111,
-        };
-
-        static int GetAnswerTone(uint toneValue) // 0～8191の値を与え、音程の処理用正解データに変換する
-        {
-            uint value = (toneValue + 1) * 5;
-            if (value < 8192)
+            if (letter >= '1' && letter < '1' + sampleCount)
             {
-                return 0b00001;
+                return letter - '1';
             }
-            else if (value < 8192 * 2)
-            {
-                return 0b00010;
-            }
-            else if (value < 8192 * 3)
-            {
-                return 0b00100;
-            }
-            else if (value < 8192 * 4)
-            {
-                return 0b01000;
-            }
-            else
-            {
-                return 0b10000;
-            }
+            return -1;
         }
     }
 }

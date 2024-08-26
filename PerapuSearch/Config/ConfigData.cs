@@ -7,5 +7,7 @@
         public int Gen4MaxCount { get; set; } = 0;
         public int Gen5MinCount { get; set; } = 40;
         public int Gen5MaxCount { get; set; } = 60;
+        public int Fuzziness { get; set; } = 40;
+        public int SampleCount { get; set; } = 3;
     }
 }
