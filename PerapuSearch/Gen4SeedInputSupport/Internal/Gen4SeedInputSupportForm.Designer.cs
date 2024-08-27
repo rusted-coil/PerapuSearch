@@ -121,6 +121,7 @@
             Controls.Add(m_InitialSeedBox);
             Controls.Add(label1);
             Name = "Gen4SeedInputSupportForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "第4世代入力補助";
             FormClosing += Gen4SeedInputSupportForm_FormClosing;
             ((System.ComponentModel.ISupportInitialize)m_FrameDiffRangeBox).EndInit();

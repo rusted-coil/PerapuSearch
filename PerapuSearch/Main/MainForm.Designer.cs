@@ -159,11 +159,11 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("メイリオ", 9F);
-            label3.Location = new Point(382, 17);
+            label3.Location = new Point(386, 17);
             label3.Name = "label3";
-            label3.Size = new Size(73, 18);
+            label3.Size = new Size(71, 18);
             label3.TabIndex = 6;
-            label3.Text = "あいまいさ:";
+            label3.Text = "曖昧さ[%]:";
             // 
             // m_FuzzinessBox
             // 
@@ -179,7 +179,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("メイリオ", 9F);
-            label4.Location = new Point(534, 17);
+            label4.Location = new Point(535, 17);
             label4.Name = "label4";
             label4.Size = new Size(109, 18);
             label4.TabIndex = 8;

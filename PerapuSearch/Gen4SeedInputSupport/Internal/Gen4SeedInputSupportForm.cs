@@ -12,13 +12,32 @@ namespace PerapuSearch.Gen4SeedInputSupport.Internal
         Subject<string> m_InputTextDecided = new Subject<string>();
         public IObservable<string> InputTextDecided => m_InputTextDecided;
 
-        public Gen4SeedInputSupportForm()
+        readonly Gen4SeedInputSupportFormConfig m_Config;
+
+        public Gen4SeedInputSupportForm(Gen4SeedInputSupportFormConfig config)
         {
+            m_Config = config;
             InitializeComponent();
+
+            // 設定を反映
+            m_InitialSeedBox.Text = m_Config.InitialSeed;
+            m_SecondsDiffCheck.Checked = m_Config.AccountsSecondsDiff;
+            m_FrameDiffRangeBox.Value = m_Config.FrameDiffRange;
+            m_OnlyEvenDiffCheck.Checked = m_Config.OnlyEvenDiff;
+        }
+
+        void ReflectConfig()
+        {
+            m_Config.InitialSeed = m_InitialSeedBox.Text;
+            m_Config.AccountsSecondsDiff = m_SecondsDiffCheck.Checked;
+            m_Config.FrameDiffRange = (int)m_FrameDiffRangeBox.Value;
+            m_Config.OnlyEvenDiff = m_OnlyEvenDiffCheck.Checked;
         }
 
         private void Gen4SeedInputSupportForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            ReflectConfig();
+
             m_FormClosing.OnNext(default);
             m_FormClosing.OnCompleted();
             m_FormClosing.Dispose();
@@ -29,6 +48,8 @@ namespace PerapuSearch.Gen4SeedInputSupport.Internal
         {
             if (uint.TryParse(m_InitialSeedBox.Text, System.Globalization.NumberStyles.HexNumber, null, out uint initialSeed))
             {
+                ReflectConfig();
+
                 var sb = new StringBuilder();
                 uint secondsOffsetMin = m_SecondsDiffCheck.Checked ? 0u : 1u; // +1の底上げ
                 uint secondsOffsetMax = m_SecondsDiffCheck.Checked ? 2u : 1u; // +1の底上げ

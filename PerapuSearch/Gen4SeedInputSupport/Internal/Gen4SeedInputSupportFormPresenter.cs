@@ -18,9 +18,9 @@ namespace PerapuSearch.Gen4SeedInputSupport.Internal
 
         readonly CompositeDisposable m_Disposables = new CompositeDisposable();
 
-        public Gen4SeedInputSupportFormPresenter()
+        public Gen4SeedInputSupportFormPresenter(Gen4SeedInputSupportFormConfig config)
         {
-            m_Form = new Gen4SeedInputSupportForm();
+            m_Form = new Gen4SeedInputSupportForm(config);
             m_Disposables.Add(m_FormClosing);
             m_Disposables.Add(m_Form.FormClosingEvent.Subscribe(_ => OnFormClosing()));
         }
