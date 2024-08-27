@@ -28,6 +28,8 @@ namespace PerapuSearch
 
             InitializeComponent();
 
+            Text = $"ペラップ聴き分けツール - PerapuSearch {Const.Version}";
+
             Gen4SeedInputSupportButton = ButtonFactory.CreateButton(m_Gen4SeedInputSupportButton);
 
             m_UsageLabel.Text = 
