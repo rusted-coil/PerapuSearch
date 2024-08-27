@@ -1,4 +1,5 @@
 ﻿using PerapuSearch.Gen4SeedInputSupport.Internal;
+using System.Runtime.Versioning;
 
 namespace PerapuSearch.Gen4SeedInputSupport
 {
@@ -14,6 +15,7 @@ namespace PerapuSearch.Gen4SeedInputSupport
         /// <para> * 既に開かれている場合はフォーカスし、nullを返します。</para>
         /// </summary>
         /// <returns>第4世代入力補助フォームで決定が押された時の初期seed候補の文字列を通知するストリーム</returns>
+        [SupportedOSPlatform("windows")]
         public static IObservable<string>? OpenOrFocusForm()
         {
             if (s_Form == null)

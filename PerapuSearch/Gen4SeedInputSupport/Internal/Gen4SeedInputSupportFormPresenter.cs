@@ -1,9 +1,11 @@
 ﻿using System.Reactive;
 using System.Reactive.Disposables;
 using System.Reactive.Subjects;
+using System.Runtime.Versioning;
 
 namespace PerapuSearch.Gen4SeedInputSupport.Internal
 {
+    [SupportedOSPlatform("windows")]
     internal sealed class Gen4SeedInputSupportFormPresenter
     {
         public IObservable<string> InputTextDecided => m_Form.InputTextDecided;

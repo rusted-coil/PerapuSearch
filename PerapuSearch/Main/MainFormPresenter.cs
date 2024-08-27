@@ -3,10 +3,12 @@ using Gen5RNGLib.Chatot;
 using PerapuSearch.Config;
 using PerapuSearch.Infrastructure;
 using System.Reactive.Disposables;
+using System.Runtime.Versioning;
 using System.Text;
 
 namespace PerapuSearch.Main
 {
+    [SupportedOSPlatform("windows")]
     internal sealed class MainFormPresenter : IDisposable
     {
         readonly MainForm m_Form;

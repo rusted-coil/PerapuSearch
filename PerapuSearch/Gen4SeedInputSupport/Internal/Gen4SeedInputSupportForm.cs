@@ -1,9 +1,11 @@
 ﻿using System.Reactive.Subjects;
 using System.Reactive;
 using System.Text;
+using System.Runtime.Versioning;
 
 namespace PerapuSearch.Gen4SeedInputSupport.Internal
 {
+    [SupportedOSPlatform("windows")]
     internal partial class Gen4SeedInputSupportForm : Form
     {
         AsyncSubject<Unit> m_FormClosing = new AsyncSubject<Unit>();

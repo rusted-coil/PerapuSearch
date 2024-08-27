@@ -2,9 +2,11 @@ using FormRx.Button;
 using PerapuSearch.Config;
 using System.Reactive;
 using System.Reactive.Subjects;
+using System.Runtime.Versioning;
 
 namespace PerapuSearch
 {
+    [SupportedOSPlatform("windows")]
     public partial class MainForm : Form
     {
         public enum GenerationType

@@ -1,7 +1,9 @@
 using PerapuSearch.Main;
+using System.Runtime.Versioning;
 
 namespace PerapuSearch
 {
+    [SupportedOSPlatform("windows")]
     internal static class Program
     {
         [STAThread]
