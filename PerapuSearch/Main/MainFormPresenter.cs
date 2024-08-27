@@ -74,6 +74,11 @@ namespace PerapuSearch.Main
 
             foreach (var seedString in seeds)
             {
+                if (string.IsNullOrEmpty(seedString))
+                {
+                    continue;
+                }
+
                 int[] answerTones = new int[maxCount];
                 // 第4世代版
                 if (m_Config.Generation == (int)MainForm.GenerationType.Gen4)
